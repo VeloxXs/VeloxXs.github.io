@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinan Sarıtaş - Backend Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(22, 22, 36, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #00d4ff;
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00d4ff;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            cursor: pointer;
+        }
+
+        .logo:hover {
+            transform: scale(1.1) rotate(5deg);
+            transition: all 0.3s;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #00d4ff;
+        }
+
+        .lang-switch {
+            background: #00d4ff;
+            color: #0a0a0a;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .lang-switch:hover {
+            background: #00b8e6;
+            transform: scale(1.05);
+        }
+
+        .hero {
+            padding: 150px 0 100px;
+            text-align: center;
+            position: relative;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .floating-emoji {
+            position: absolute;
+            font-size: 50px;
+            opacity: 0.3;
+            animation: float 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .emoji-1 { top: 10%; left: 10%; animation-delay: 0s; }
+        .emoji-2 { top: 20%; right: 15%; animation-delay: 1s; }
+        .emoji-3 { bottom: 30%; left: 5%; animation-delay: 2s; }
+        .emoji-4 { bottom: 20%; right: 10%; animation-delay: 1.5s; }
+
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+
+        .hero h2 {
+            font-size: 24px;
+            color: #b0b0b0;
+            margin-bottom: 30px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            color: #0a0a0a;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #00d4ff;
+            border: 2px solid #00d4ff;
+        }
+
+        .btn-secondary:hover {
+            background: #00d4ff;
+            color: #0a0a0a;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 42px;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #00d4ff;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #00d4ff, #00ff88);
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #c0c0c0;
+        }
+
+        .about-text strong {
+            color: #00d4ff;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: rgba(22, 22, 36, 0.6);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            border-color: #00d4ff;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .stat-card:hover .stat-number {
+            animation: rotate 0.5s ease;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #00d4ff;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #888;
+            font-size: 16px;
+        }
+
+        .experience-timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #00d4ff, #00ff88);
+        }
+
+        .experience-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding: 25px;
+            background: rgba(22, 22, 36, 0.6);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .experience-item:hover {
+            border-color: #00d4ff;
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -47px;
+            top: 30px;
+            width: 14px;
+            height: 14px;
+            background: #00d4ff;
+            border-radius: 50%;
+            border: 3px solid #0a0a0a;
+        }
+
+        .experience-title {
+            font-size: 22px;
+            color: #00d4ff;
+            margin-bottom: 10px;
+        }
+
+        .experience-company {
+            color: #00ff88;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .experience-date {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .experience-desc {
+            color: #c0c0c0;
+            line-height: 1.6;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-card {
+            background: rgba(22, 22, 36, 0.6);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .skill-card:hover {
+            border-color: #00d4ff;
+            transform: translateY(-5px) rotate(2deg);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .skill-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #00d4ff;
+            margin-bottom: 15px;
+        }
+
+        .skill-level {
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .skill-bar {
+            background: rgba(255, 255, 255, 0.1);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff, #00ff88);
+            border-radius: 5px;
+            transition: width 1s ease;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: rgba(22, 22, 36, 0.6);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: #00d4ff;
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
+        }
+
+        .project-content {
+            padding: 30px;
+        }
+
+        .project-title {
+            font-size: 22px;
+            color: #00d4ff;
+            margin-bottom: 15px;
+        }
+
+        .project-desc {
+            color: #c0c0c0;
+            margin-bottom: 20px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tech-tag {
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .tech-tag:hover {
+            background: rgba(0, 212, 255, 0.4);
+            transform: scale(1.1);
+            cursor: default;
+        }
+
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .cert-card {
+            background: rgba(22, 22, 36, 0.6);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .cert-card:hover {
+            border-color: #00d4ff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.2);
+        }
+
+        .cert-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .cert-title {
+            color: #00d4ff;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .cert-org {
+            color: #00ff88;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .cert-date {
+            color: #888;
+            font-size: 13px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: rgba(22, 22, 36, 0.6);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 50px;
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: #00d4ff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .social-icon {
+            font-size: 24px;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(22, 22, 36, 0.6);
+            padding: 50px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        .contact-icon {
+            font-size: 24px;
+            color: #00d4ff;
+        }
+
+        .contact-info a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: #00d4ff;
+        }
+
+        footer {
+            background: rgba(22, 22, 36, 0.95);
+            padding: 30px 0;
+            text-align: center;
+            border-top: 2px solid #00d4ff;
+            margin-top: 80px;
+        }
+
+        footer p {
+            color: #888;
+        }
+
+        .cursor-trail {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #00d4ff;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-timeline {
+                padding-left: 30px;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">SS</div>
+            <div class="nav-links">
+                <a href="#about" class="nav-link" data-tr="Hakkımda" data-en="About">Hakkımda</a>
+                <a href="#experience" class="nav-link" data-tr="Deneyim" data-en="Experience">Deneyim</a>
+                <a href="#skills" class="nav-link" data-tr="Yetenekler" data-en="Skills">Yetenekler</a>
+                <a href="#projects" class="nav-link" data-tr="Projeler" data-en="Projects">Projeler</a>
+                <a href="#certifications" class="nav-link" data-tr="Sertifikalar" data-en="Certifications">Sertifikalar</a>
+                <a href="#contact" class="nav-link" data-tr="İletişim" data-en="Contact">İletişim</a>
+                <button class="lang-switch" onclick="toggleLanguage()">EN</button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="floating-emoji emoji-1">☕</div>
+        <div class="floating-emoji emoji-2">💻</div>
+        <div class="floating-emoji emoji-3">🚀</div>
+        <div class="floating-emoji emoji-4">⚡</div>
+        <div class="container">
+            <h1>Sinan Sarıtaş</h1>
+            <h2 class="hero-subtitle" data-tr="Java & Spring Boot Backend Developer | Kurumsal Uygulama Geliştirme" data-en="Java & Spring Boot Backend Developer | Enterprise Application Development">Java & Spring Boot Backend Developer | Kurumsal Uygulama Geliştirme</h2>
+            <p class="hero-desc" data-tr="Backend geliştirme konusunda tutkulu, Java ve Spring Framework konusunda uzmanlaşmış bir yazılım geliştirici" data-en="A passionate software developer specializing in backend development with Java and Spring Framework">Backend geliştirme konusunda tutkulu, Java ve Spring Framework konusunda uzmanlaşmış bir yazılım geliştirici</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary cta-projects" data-tr="Projelerimi İncele" data-en="View Projects">Projelerimi İncele</a>
+                <a href="#contact" class="btn btn-secondary cta-contact" data-tr="İletişime Geç" data-en="Get in Touch">İletişime Geç</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title" data-tr="Hakkımda" data-en="About Me">Hakkımda</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-intro" data-tr="Merhaba! Ben Sinan, 22 yaşında ve Sivas Cumhuriyet Üniversitesi Bilgisayar Mühendisliği 3. sınıf öğrencisiyim." data-en="Hello! I'm Sinan, 22 years old and a 3rd year Computer Engineering student at Sivas Cumhuriyet University.">Merhaba! Ben Sinan, 22 yaşında ve Sivas Cumhuriyet Üniversitesi Bilgisayar Mühendisliği 3. sınıf öğrencisiyim.</p>
+                    <p class="about-passion" data-tr="Backend geliştirme konusundaki tutkum, özellikle Java ve Spring Framework üzerinde yoğunlaşıyor. Kurumsal uygulama mimarileri, API geliştirme, çok katmanlı yapılar ve veritabanı yönetimi konularında kapsamlı deneyim kazandım." data-en="My passion for backend development is especially focused on Java and Spring Framework. I have gained comprehensive experience in enterprise application architectures, API development, multi-tier structures, and database management.">Backend geliştirme konusundaki tutkum, özellikle Java ve Spring Framework üzerinde yoğunlaşıyor. Kurumsal uygulama mimarileri, API geliştirme, çok katmanlı yapılar ve veritabanı yönetimi konularında kapsamlı deneyim kazandım.</p>
+                    <p class="about-work" data-tr="Özellikle bankacılık ve finans teknolojileri alanına yoğun ilgi duyuyorum. Performans, güvenlik, ölçeklenebilirlik ve temiz kod prensipleri üzerine çalışmalarımı inşa ediyorum. TNC Group'ta staj yaparak kurumsal yazılım geliştirme süreçlerini deneyimledim." data-en="I have a strong interest in banking and financial technologies. I build my work on performance, security, scalability, and clean code principles. I experienced enterprise software development processes through my internship at TNC Group.">Özellikle bankacılık ve finans teknolojileri alanına yoğun ilgi duyuyorum. Performans, güvenlik, ölçeklenebilirlik ve temiz kod prensipleri üzerine çalışmalarımı inşa ediyorum. TNC Group'ta staj yaparak kurumsal yazılım geliştirme süreçlerini deneyimledim.</p>
+                </div>
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-number">25+</div>
+                        <div class="stat-label stat-label-certs" data-tr="Sertifika" data-en="Certifications">Sertifika</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4+</div>
+                        <div class="stat-label stat-label-langs" data-tr="Programlama Dili" data-en="Programming Languages">Programlama Dili</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label stat-label-exp" data-tr="Yıl Deneyim" data-en="Years Experience">Yıl Deneyim</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label stat-label-learning" data-tr="Öğrenme İsteği" data-en="Passion for Learning">Öğrenme İsteği</div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <p style="color: #888; font-style: italic;" class="fun-fact" data-tr="💡 Eğlenceli Gerçek: İlk kodum 'Hello World' değil, 'Merhaba Dünya' idi! 🇹🇷" data-en="💡 Fun Fact: My first code wasn't 'Hello World', it was 'Merhaba Dünya'! 🇹🇷">💡 Eğlenceli Gerçek: İlk kodum 'Hello World' değil, 'Merhaba Dünya' idi! 🇹🇷</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" style="background: rgba(0, 0, 0, 0.2);">
+        <div class="container">
+            <h2 class="section-title" data-tr="Deneyim" data-en="Experience">Deneyim</h2>
+            <div class="experience-timeline">
+                <div class="experience-item">
+                    <div class="experience-title" data-tr="Veritabanı Yöneticisi" data-en="Database Administrator">Veritabanı Yöneticisi</div>
+                    <div class="experience-company">Big Anatolia</div>
+                    <div class="experience-date" data-tr="Mart 2025 - Temmuz 2025 · 5 ay · Yarı Zamanlı" data-en="March 2025 - July 2025 · 5 months · Part-time">Mart 2025 - Temmuz 2025 · 5 ay · Yarı Zamanlı</div>
+                    <div class="experience-desc" data-tr="Veri tabanı yönetim sistemleri üzerine gözlem ve eğitim süreci yürüttüm. Şirketin veri tabanı altyapısının işleyişini yakından inceleyerek veri yönetimi, güvenliği ve optimizasyon konularında kendimi geliştirdim." data-en="Conducted observation and training process on database management systems. Developed myself in data management, security, and optimization by closely examining the company's database infrastructure.">Veri tabanı yönetim sistemleri üzerine gözlem ve eğitim süreci yürüttüm. Şirketin veri tabanı altyapısının işleyişini yakından inceleyerek veri yönetimi, güvenliği ve optimizasyon konularında kendimi geliştirdim.</div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-title" data-tr="Bilgi Teknolojileri Stajyeri" data-en="IT Intern">Bilgi Teknolojileri Stajyeri</div>
+                    <div class="experience-company">TNC Group</div>
+                    <div class="experience-date" data-tr="2024 · Staj" data-en="2024 · Internship">2024 · Staj</div>
+                    <div class="experience-desc" data-tr="Yazılım geliştirme süreçleri, ağ yapıları, sistem yönetimi ve kurumsal bilişim altyapıları hakkında değerli bilgiler edinme fırsatı buldum. Hem teknik bilgilerimi geliştirdim hem de ekip çalışmasının önemini deneyimledim." data-en="Had the opportunity to gain valuable knowledge about software development processes, network structures, system management, and corporate IT infrastructure. Both developed my technical knowledge and experienced the importance of teamwork.">Yazılım geliştirme süreçleri, ağ yapıları, sistem yönetimi ve kurumsal bilişim altyapıları hakkında değerli bilgiler edinme fırsatı buldum. Hem teknik bilgilerimi geliştirdim hem de ekip çalışmasının önemini deneyimledim.</div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-title" data-tr="Kişisel Gelişim Dönemi" data-en="Professional Development Period">Kişisel Gelişim Dönemi</div>
+                    <div class="experience-company" data-tr="Öğrenme ve Gelişim" data-en="Learning & Growth">Öğrenme ve Gelişim</div>
+                    <div class="experience-date" data-tr="Temmuz 2024 - Eylül 2024 · 3 ay" data-en="July 2024 - September 2024 · 3 months">Temmuz 2024 - Eylül 2024 · 3 ay</div>
+                    <div class="experience-desc" data-tr="Kişisel ve teknik gelişimime odaklandım. Web geliştirme, veri tabanı yönetimi ve yazılım mimarisi alanlarında kendimi eğittim. Fitness ve kütüphane uygulamaları üzerinde çalışarak proje geliştirme ve kullanıcı deneyimi tasarımı konularında pratik yaptım." data-en="Focused on my personal and technical development. Trained myself in web development, database management, and software architecture. Practiced project development and user experience design by working on fitness and library applications.">Kişisel ve teknik gelişimime odaklandım. Web geliştirme, veri tabanı yönetimi ve yazılım mimarisi alanlarında kendimi eğittim. Fitness ve kütüphane uygulamaları üzerinde çalışarak proje geliştirme ve kullanıcı deneyimi tasarımı konularında pratik yaptım.</div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-title" data-tr="Web Geliştiricisi (Gönüllü)" data-en="Web Developer (Volunteer)">Web Geliştiricisi (Gönüllü)</div>
+                    <div class="experience-company">Perfect Ajans</div>
+                    <div class="experience-date" data-tr="Ocak 2021 - Ocak 2022 · 1 yıl 1 ay" data-en="January 2021 - January 2022 · 1 year 1 month">Ocak 2021 - Ocak 2022 · 1 yıl 1 ay</div>
+                    <div class="experience-desc" data-tr="1 yıl boyunca gönüllü olarak web geliştirme projelerinde yer aldım. Frontend ve backend alanlarında aktif görev alarak HTML, CSS, JavaScript ve Node.js teknolojileriyle çeşitli projelerin geliştirilmesine katkı sağladım." data-en="Participated in web development projects as a volunteer for 1 year. Contributed to various project developments with HTML, CSS, JavaScript, and Node.js technologies by taking active roles in frontend and backend areas.">1 yıl boyunca gönüllü olarak web geliştirme projelerinde yer aldım. Frontend ve backend alanlarında aktif görev alarak HTML, CSS, JavaScript ve Node.js teknolojileriyle çeşitli projelerin geliştirilmesine katkı sağladım.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title" data-tr="Teknik Yetenekler" data-en="Technical Skills">Teknik Yetenekler</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-name">Java</div>
+                    <div class="skill-level skill-level-expert" data-tr="Uzman Seviye" data-en="Expert Level">Uzman Seviye</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 95%"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">Spring Framework</div>
+                    <div class="skill-level skill-level-expert" data-tr="Uzman Seviye" data-en="Expert Level">Uzman Seviye</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">Python</div>
+                    <div class="skill-level skill-level-intermediate" data-tr="Orta Seviye" data-en="Intermediate">Orta Seviye</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 70%"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">C#</div>
+                    <div class="skill-level skill-level-intermediate" data-tr="Orta Seviye" data-en="Intermediate">Orta Seviye</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 65%"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">C++</div>
+                    <div class="skill-level skill-level-intermediate" data-tr="Orta Seviye" data-en="Intermediate">Orta Seviye</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 65%"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">Web Development</div>
+                    <div class="skill-level skill-level-advanced" data-tr="İleri Seviye" data-en="Advanced">İleri Seviye</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">Database Management</div>
+                    <div class="skill-level skill-level-advanced" data-tr="İleri Seviye" data-en="Advanced">İleri Seviye</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name" data-tr="İngilizce" data-en="English">İngilizce</div>
+                    <div class="skill-level">B2 (Upper-Intermediate)</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 75%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" style="background: rgba(0, 0, 0, 0.2);">
+        <div class="container">
+            <h2 class="section-title" data-tr="Projelerim" data-en="My Projects">Projelerim</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title" data-tr="Kütüphane Yönetim Sistemi" data-en="Library Management System">Kütüphane Yönetim Sistemi</h3>
+                        <p class="project-desc" data-tr="Kitap takibi, üye yönetimi ve ödünç alma işlemlerini kolaylaştıran kapsamlı bir kütüphane yönetim sistemi. Veritabanı entegrasyonu ve kullanıcı dostu arayüz ile geliştirildi." data-en="A comprehensive library management system that facilitates book tracking, member management, and borrowing operations. Developed with database integration and user-friendly interface.">Kitap takibi, üye yönetimi ve ödünç alma işlemlerini kolaylaştıran kapsamlı bir kütüphane yönetim sistemi. Veritabanı entegrasyonu ve kullanıcı dostu arayüz ile geliştirildi.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">SQL</span>
+                            <span class="tech-tag">JDBC</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title" data-tr="Fitness Uygulaması" data-en="Fitness Application">Fitness Uygulaması</h3>
+                        <p class="project-desc" data-tr="Kullanıcıların antrenman programlarını takip edebileceği, kalori hesaplaması yapabileceği ve ilerleme kaydedebileceği fitness takip uygulaması. Nesne yönelimli programlama prensipleri ile geliştirildi." data-en="A fitness tracking application where users can track workout programs, calculate calories, and record progress. Developed with object-oriented programming principles.">Kullanıcıların antrenman programlarını takip edebileceği, kalori hesaplaması yapabileceği ve ilerleme kaydedebileceği fitness takip uygulaması. Nesne yönelimli programlama prensipleri ile geliştirildi.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">OOP</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title" data-tr="Araç Kiralama Projesi" data-en="Rent a Car Project">Araç Kiralama Projesi</h3>
+                        <p class="project-desc" data-tr="Araç kiralama işlemlerini yöneten, rezervasyon sistemi ve fiyatlandırma modülü içeren profesyonel bir uygulama. Müşteri yönetimi ve raporlama özellikleri ile destekleniyor." data-en="A professional application managing car rental operations, including reservation system and pricing module. Supported with customer management and reporting features.">Araç kiralama işlemlerini yöneten, rezervasyon sistemi ve fiyatlandırma modülü içeren profesyonel bir uygulama. Müşteri yönetimi ve raporlama özellikleri ile destekleniyor.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Database</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="color: #00d4ff; font-size: 18px;" class="spring-project" data-tr="🚀 Spring Framework ile yeni projeler üzerinde çalışıyorum..." data-en="🚀 Working on new projects with Spring Framework...">🚀 Spring Framework ile yeni projeler üzerinde çalışıyorum...</p>
+                <p style="color: #888; font-size: 16px; margin-top: 20px;" class="coffee-joke" data-tr="☕ Bug'ları kahveye çeviriyorum... Her gün!" data-en="☕ Converting bugs into coffee... Every day!">☕ Bug'ları kahveye çeviriyorum... Her gün!</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications">
+        <div class="container">
+            <h2 class="section-title" data-tr="Sertifikalar & Eğitimler" data-en="Certifications & Training">Sertifikalar & Eğitimler</h2>
+            <div style="text-align: center; margin-bottom: 40px;">
+                <p style="color: #c0c0c0; font-size: 18px;" data-tr="Sürekli öğrenme ve gelişim yolculuğumdan bazı önemli kilometre taşları 🎓" data-en="Some important milestones from my continuous learning and development journey 🎓">Sürekli öğrenme ve gelişim yolculuğumdan bazı önemli kilometre taşları 🎓</p>
+            </div>
+            <div class="certifications-grid">
+                <div class="cert-card">
+                    <div class="cert-icon">🎯</div>
+                    <div class="cert-title" data-tr="Başlangıç Seviye Java ile Backend Web Development" data-en="Beginner Level Java Backend Web Development">Başlangıç Seviye Java ile Backend Web Development</div>
+                    <div class="cert-org">Patika.dev</div>
+                    <div class="cert-date" data-tr="Temmuz 2025" data-en="July 2025">Temmuz 2025</div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">☕</div>
+                    <div class="cert-title" data-tr="İleri Seviye Java" data-en="Advanced Java">İleri Seviye Java</div>
+                    <div class="cert-org">BTK Akademi</div>
+                    <div class="cert-date" data-tr="Şubat 2025" data-en="February 2025">Şubat 2025</div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🚀</div>
+                    <div class="cert-title" data-tr="İleri Java 1, 2, 3" data-en="Advanced Java 1, 2, 3">İleri Java 1, 2, 3</div>
+                    <div class="cert-org">Turkcell Geleceği Yazanlar</div>
+                    <div class="cert-date" data-tr="Aralık 2024" data-en="December 2024">Aralık 2024</div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🐍</div>
+                    <div class="cert-title" data-tr="Python 1, 2, 3, 4" data-en="Python 1, 2, 3, 4">Python 1, 2, 3, 4</div>
+                    <div class="cert-org">Turkcell Geleceği Yazanlar</div>
+                    <div class="cert-date" data-tr="Şubat 2025" data-en="February 2025">Şubat 2025</div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🤖</div>
+                    <div class="cert-title" data-tr="Yapay Zeka İle Dönüştürelim" data-en="Transform with AI">Yapay Zeka İle Dönüştürelim</div>
+                    <div class="cert-org">Kodluyoruz</div>
+                    <div class="cert-date" data-tr="Nisan 2025" data-en="April 2025">Nisan 2025</div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">📊</div>
+                    <div class="cert-title" data-tr="Data Science ve AI'a Giriş" data-en="Intro to Data Science and AI">Data Science ve AI'a Giriş</div>
+                    <div class="cert-org">Miuul</div>
+                    <div class="cert-date" data-tr="Şubat 2025" data-en="February 2025">Şubat 2025</div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🧠</div>
+                    <div class="cert-title" data-tr="Doğal Dil İşleme" data-en="Natural Language Processing">Doğal Dil İşleme</div>
+                    <div class="cert-org">Turkcell Geleceği Yazanlar</div>
+                    <div class="cert-date" data-tr="Şubat 2025" data-en="February 2025">Şubat 2025</div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🔒</div>
+                    <div class="cert-title" data-tr="Siber Güvenliğe Giriş & Pentesting" data-en="Intro to Cybersecurity & Pentesting">Siber Güvenliğe Giriş & Pentesting</div>
+                    <div class="cert-org">Turkcell Geleceği Yazanlar</div>
+                    <div class="cert-date" data-tr="Şubat 2025" data-en="February 2025">Şubat 2025</div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🌐</div>
+                    <div class="cert-title" data-tr="HTML5 ile Web Geliştirme" data-en="Web Development with HTML5">HTML5 ile Web Geliştirme</div>
+                    <div class="cert-org">BTK Akademi</div>
+                    <div class="cert-date" data-tr="Şubat 2025" data-en="February 2025">Şubat 2025</div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🇬🇧</div>
+                    <div class="cert-title" data-tr="B2 Seviye İngilizce" data-en="B2 Level English">B2 Seviye İngilizce</div>
+                    <div class="cert-org">BTK Akademi</div>
+                    <div class="cert-date" data-tr="Şubat 2025" data-en="February 2025">Şubat 2025</div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">💼</div>
+                    <div class="cert-title" data-tr="MBA'e Giriş & Finansal Okuryazarlık" data-en="Intro to MBA & Financial Literacy">MBA'e Giriş & Finansal Okuryazarlık</div>
+                    <div class="cert-org">Microfon</div>
+                    <div class="cert-date" data-tr="Mart-Nisan 2025" data-en="March-April 2025">Mart-Nisan 2025</div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">⚡</div>
+                    <div class="cert-title" data-tr="Teknolojide Fırsat Eşitliği" data-en="Equal Opportunity in Technology">Teknolojide Fırsat Eşitliği</div>
+                    <div class="cert-org">BAUGO</div>
+                    <div class="cert-date" data-tr="Şubat-Mart 2025" data-en="February-March 2025">Şubat-Mart 2025</div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="color: #00ff88; font-size: 18px; font-weight: 600;" data-tr="📚 25+ Sertifika ile öğrenme yolculuğum devam ediyor!" data-en="📚 My learning journey continues with 25+ certifications!">📚 25+ Sertifika ile öğrenme yolculuğum devam ediyor!</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="background: rgba(0, 0, 0, 0.2);">
+        <div class="container">
+            <h2 class="section-title" data-tr="İletişim & Sosyal Medya" data-en="Contact & Social Media">İletişim & Sosyal Medya</h2>
+            
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/sinan-saritas01" target="_blank" class="social-link">
+                    <span class="social-icon">💼</span>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="mailto:ssaritasyazilim@gmail.com" class="social-link">
+                    <span class="social-icon">📧</span>
+                    <span>Email</span>
+                </a>
+                <a href="tel:+905303466931" class="social-link">
+                    <span class="social-icon">📱</span>
+                    <span data-tr="Telefon" data-en="Phone">Telefon</span>
+                </a>
+            </div>
+
+            <div class="contact-content">
+                <p style="text-align: center; margin-bottom: 40px; color: #c0c0c0;" class="contact-intro" data-tr="Proje fırsatları, iş birliği veya herhangi bir konuda benimle iletişime geçebilirsiniz. Özellikle bankacılık ve fintech alanındaki fırsatlar ilgimi çekiyor!" data-en="Feel free to reach out for project opportunities, collaboration, or any inquiries. I'm especially interested in opportunities in banking and fintech!">Proje fırsatları, iş birliği veya herhangi bir konuda benimle iletişime geçebilirsiniz. Özellikle bankacılık ve fintech alanındaki fırsatlar ilgimi çekiyor!</p>
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-info">
+                        <strong>Email</strong><br>
+                        <a href="mailto:ssaritasyazilim@gmail.com">ssaritasyazilim@gmail.com</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-info">
+                        <strong class="contact-phone-label" data-tr="Telefon" data-en="Phone">Telefon</strong><br>
+                        <a href="tel:+905303466931">+90 530 346 69 31</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-info">
+                        <strong class="contact-location-label" data-tr="Konum" data-en="Location">Konum</strong><br>
+                        <span>Sivas, Türkiye</span>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">💼</div>
+                    <div class="contact-info">
+                        <strong>LinkedIn</strong><br>
+                        <a href="https://www.linkedin.com/in/sinan-saritas01" target="_blank">linkedin.com/in/sinan-saritas01</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p class="footer-text" data-tr="© 2024 Sinan Sarıtaş. Tüm hakları saklıdır. | Backend Developer | Java & Spring Expert" data-en="© 2024 Sinan Sarıtaş. All rights reserved. | Backend Developer | Java & Spring Expert">© 2024 Sinan Sarıtaş. Tüm hakları saklıdır. | Backend Developer | Java & Spring Expert</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentLang = 'tr';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'tr' ? 'en' : 'tr';
+            const btn = document.querySelector('.lang-switch');
+            btn.textContent = currentLang === 'tr' ? 'EN' : 'TR';
+
+            document.querySelectorAll('[data-tr]').forEach(el => {
+                el.textContent = el.getAttribute(`data-${currentLang}`);
+            });
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.skill-card, .project-card, .stat-card, .cert-card, .experience-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        let trails = [];
+        const maxTrails = 15;
+
+        for (let i = 0; i < maxTrails; i++) {
+            let trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            document.body.appendChild(trail);
+            trails.push(trail);
+        }
+
+        let trailIndex = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            let trail = trails[trailIndex];
+            trail.style.left = e.clientX + 'px';
+            trail.style.top = e.clientY + 'px';
+            trail.style.opacity = '0.6';
+
+            setTimeout(() => {
+                trail.style.opacity = '0';
+            }, 200);
+
+            trailIndex = (trailIndex + 1) % maxTrails;
+        });
+
+        let konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    document.body.style.animation = 'rotate 2s linear';
+                    setTimeout(() => {
+                        alert(currentLang === 'tr' ? '🎉 Gizli kodu buldun! Gerçek bir geek\'sin! 🚀' : '🎉 You found the secret code! You\'re a true geek! 🚀');
+                        document.body.style.animation = '';
+                    }, 2000);
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+
+        document.querySelectorAll('.stat-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const emojis = ['⭐', '🎯', '🔥', '💡', '🚀', '⚡', '💻'];
+                const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+                const emojiEl = document.createElement('div');
+                emojiEl.textContent = emoji;
+                emojiEl.style.position = 'fixed';
+                emojiEl.style.left = card.getBoundingClientRect().left + card.offsetWidth / 2 + 'px';
+                emojiEl.style.top = card.getBoundingClientRect().top + 'px';
+                emojiEl.style.fontSize = '30px';
+                emojiEl.style.pointerEvents = 'none';
+                emojiEl.style.zIndex = '9999';
+                emojiEl.style.transition = 'all 1s ease-out';
+                document.body.appendChild(emojiEl);
+
+                setTimeout(() => {
+                    emojiEl.style.transform = 'translateY(-100px)';
+                    emojiEl.style.opacity = '0';
+                }, 10);
+
+                setTimeout(() => {
+                    emojiEl.remove();
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
