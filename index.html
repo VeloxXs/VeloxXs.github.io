@@ -106,6 +106,22 @@
             to { transform: rotate(360deg); }
         }
 
+        @keyframes slideIn {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .floating-emoji {
             position: absolute;
             font-size: 50px;
@@ -122,11 +138,12 @@
         .hero h1 {
             font-size: 56px;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            background: linear-gradient(135deg, #00d4ff, #00ff88, #00d4ff);
+            background-size: 200% 200%;
+            animation: gradient-shift 3s ease infinite;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: glow 2s ease-in-out infinite;
         }
 
         @keyframes glow {
@@ -472,6 +489,45 @@
             font-size: 13px;
         }
 
+        .cert-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            color: #0a0a0a;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .cert-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+        }
+
+        .cert-card {
+            background: rgba(22, 22, 36, 0.6);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .cert-card:hover {
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        .project-card {
+            background: rgba(22, 22, 36, 0.6);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s;
+        }
+
         .social-links {
             display: flex;
             justify-content: center;
@@ -593,9 +649,58 @@
         .hidden {
             display: none;
         }
+
+        .typing-text {
+            border-right: 3px solid #00d4ff;
+            animation: blink 0.7s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .parallax-layer {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(0, 255, 136, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        section {
+            position: relative;
+        }
+
+        .skill-bar-container {
+            position: relative;
+        }
+
+        .skill-percentage {
+            position: absolute;
+            right: 0;
+            top: -25px;
+            color: #00d4ff;
+            font-size: 14px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
+    <div class="parallax-bg">
+        <div class="parallax-layer"></div>
+    </div>
+
     <header>
         <nav class="container">
             <div class="logo">SS</div>
@@ -700,57 +805,81 @@
                 <div class="skill-card">
                     <div class="skill-name">Java</div>
                     <div class="skill-level skill-level-expert" data-tr="Uzman Seviye" data-en="Expert Level">Uzman Seviye</div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 95%"></div>
+                    <div class="skill-bar-container">
+                        <div class="skill-percentage">95%</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="skill-card">
                     <div class="skill-name">Spring Framework</div>
                     <div class="skill-level skill-level-expert" data-tr="Uzman Seviye" data-en="Expert Level">Uzman Seviye</div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 90%"></div>
+                    <div class="skill-bar-container">
+                        <div class="skill-percentage">90%</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="skill-card">
                     <div class="skill-name">Python</div>
                     <div class="skill-level skill-level-intermediate" data-tr="Orta Seviye" data-en="Intermediate">Orta Seviye</div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 70%"></div>
+                    <div class="skill-bar-container">
+                        <div class="skill-percentage">70%</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 70%"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="skill-card">
                     <div class="skill-name">C#</div>
                     <div class="skill-level skill-level-intermediate" data-tr="Orta Seviye" data-en="Intermediate">Orta Seviye</div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 65%"></div>
+                    <div class="skill-bar-container">
+                        <div class="skill-percentage">65%</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 65%"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="skill-card">
                     <div class="skill-name">C++</div>
                     <div class="skill-level skill-level-intermediate" data-tr="Orta Seviye" data-en="Intermediate">Orta Seviye</div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 65%"></div>
+                    <div class="skill-bar-container">
+                        <div class="skill-percentage">65%</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 65%"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="skill-card">
                     <div class="skill-name">Web Development</div>
                     <div class="skill-level skill-level-advanced" data-tr="İleri Seviye" data-en="Advanced">İleri Seviye</div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 85%"></div>
+                    <div class="skill-bar-container">
+                        <div class="skill-percentage">85%</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="skill-card">
                     <div class="skill-name">Database Management</div>
                     <div class="skill-level skill-level-advanced" data-tr="İleri Seviye" data-en="Advanced">İleri Seviye</div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 80%"></div>
+                    <div class="skill-bar-container">
+                        <div class="skill-percentage">80%</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="skill-card">
                     <div class="skill-name" data-tr="İngilizce" data-en="English">İngilizce</div>
                     <div class="skill-level">B2 (Upper-Intermediate)</div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 75%"></div>
+                    <div class="skill-bar-container">
+                        <div class="skill-percentage">75%</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 75%"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -812,72 +941,168 @@
                     <div class="cert-title" data-tr="Başlangıç Seviye Java ile Backend Web Development" data-en="Beginner Level Java Backend Web Development">Başlangıç Seviye Java ile Backend Web Development</div>
                     <div class="cert-org">Patika.dev</div>
                     <div class="cert-date" data-tr="Temmuz 2025" data-en="July 2025">Temmuz 2025</div>
+                    <a href="https://academy.patika.dev/certificates/cBekKQ55" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
                 </div>
                 <div class="cert-card">
                     <div class="cert-icon">☕</div>
                     <div class="cert-title" data-tr="İleri Seviye Java" data-en="Advanced Java">İleri Seviye Java</div>
                     <div class="cert-org">BTK Akademi</div>
                     <div class="cert-date" data-tr="Şubat 2025" data-en="February 2025">Şubat 2025</div>
+                    <a href="https://www.btkakademi.gov.tr/portal/certificate/validate?certificateId=2Nwc0kMMoe" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
                 </div>
                 <div class="cert-card">
                     <div class="cert-icon">🚀</div>
-                    <div class="cert-title" data-tr="İleri Java 1, 2, 3" data-en="Advanced Java 1, 2, 3">İleri Java 1, 2, 3</div>
+                    <div class="cert-title" data-tr="İleri Java 1" data-en="Advanced Java 1">İleri Java 1</div>
                     <div class="cert-org">Turkcell Geleceği Yazanlar</div>
                     <div class="cert-date" data-tr="Aralık 2024" data-en="December 2024">Aralık 2024</div>
+                    <a href="https://gelecegiyazanlar.turkcell.com.tr/sertifika/909d08141f594f26a5300238af43061a" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🔥</div>
+                    <div class="cert-title" data-tr="İleri Java 2" data-en="Advanced Java 2">İleri Java 2</div>
+                    <div class="cert-org">Turkcell Geleceği Yazanlar</div>
+                    <div class="cert-date" data-tr="Aralık 2024" data-en="December 2024">Aralık 2024</div>
+                    <a href="https://gelecegiyazanlar.turkcell.com.tr/sertifika/7b9ea9ea1d014c4998a27ce8a41494d0" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">⚡</div>
+                    <div class="cert-title" data-tr="İleri Java 3" data-en="Advanced Java 3">İleri Java 3</div>
+                    <div class="cert-org">Turkcell Geleceği Yazanlar</div>
+                    <div class="cert-date" data-tr="Aralık 2024" data-en="December 2024">Aralık 2024</div>
+                    <a href="https://gelecegiyazanlar.turkcell.com.tr/sertifika/cc605de887cc497d8e8968321706ca2d" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">☕</div>
+                    <div class="cert-title" data-tr="Java 1" data-en="Java 1">Java 1</div>
+                    <div class="cert-org">Turkcell Geleceği Yazanlar</div>
+                    <div class="cert-date" data-tr="Aralık 2024" data-en="December 2024">Aralık 2024</div>
+                    <a href="https://gelecegiyazanlar.turkcell.com.tr/sertifika/cd9f212f87cb4d77a18b1850028857bf" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">☕</div>
+                    <div class="cert-title" data-tr="Java 2" data-en="Java 2">Java 2</div>
+                    <div class="cert-org">Turkcell Geleceği Yazanlar</div>
+                    <div class="cert-date" data-tr="Aralık 2024" data-en="December 2024">Aralık 2024</div>
+                    <a href="https://gelecegiyazanlar.turkcell.com.tr/sertifika/537decabbd5a43569fb8d435b5453d18" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">☕</div>
+                    <div class="cert-title" data-tr="Java 3" data-en="Java 3">Java 3</div>
+                    <div class="cert-org">Turkcell Geleceği Yazanlar</div>
+                    <div class="cert-date" data-tr="Aralık 2024" data-en="December 2024">Aralık 2024</div>
+                    <a href="https://gelecegiyazanlar.turkcell.com.tr/sertifika/b1e678175ce44bf49a25e814f09809c0" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
                 </div>
                 <div class="cert-card">
                     <div class="cert-icon">🐍</div>
-                    <div class="cert-title" data-tr="Python 1, 2, 3, 4" data-en="Python 1, 2, 3, 4">Python 1, 2, 3, 4</div>
+                    <div class="cert-title" data-tr="Python 1" data-en="Python 1">Python 1</div>
                     <div class="cert-org">Turkcell Geleceği Yazanlar</div>
                     <div class="cert-date" data-tr="Şubat 2025" data-en="February 2025">Şubat 2025</div>
+                    <a href="https://gelecegiyazanlar.turkcell.com.tr/sertifika/16e56347de7f4f81bd28c3c487a6ed56" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🐍</div>
+                    <div class="cert-title" data-tr="Python 2" data-en="Python 2">Python 2</div>
+                    <div class="cert-org">Turkcell Geleceği Yazanlar</div>
+                    <div class="cert-date" data-tr="Şubat 2025" data-en="February 2025">Şubat 2025</div>
+                    <a href="https://gelecegiyazanlar.turkcell.com.tr/sertifika/2bf9549f968e449d88f0a189813c0400" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🐍</div>
+                    <div class="cert-title" data-tr="Python 3" data-en="Python 3">Python 3</div>
+                    <div class="cert-org">Turkcell Geleceği Yazanlar</div>
+                    <div class="cert-date" data-tr="Şubat 2025" data-en="February 2025">Şubat 2025</div>
+                    <a href="https://gelecegiyazanlar.turkcell.com.tr/sertifika/0e9f2e60da7146b1ae5c1b1f88e996ee" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🐍</div>
+                    <div class="cert-title" data-tr="Python Programlamaya Giriş" data-en="Introduction to Python Programming">Python Programlamaya Giriş</div>
+                    <div class="cert-org">Turkcell Geleceği Yazanlar</div>
+                    <div class="cert-date" data-tr="Şubat 2025" data-en="February 2025">Şubat 2025</div>
+                    <a href="https://gelecegiyazanlar.turkcell.com.tr/sertifika/53789bb9ff634b18a1fda6b89d4b8b1d" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
                 </div>
                 <div class="cert-card">
                     <div class="cert-icon">🤖</div>
                     <div class="cert-title" data-tr="Yapay Zeka İle Dönüştürelim" data-en="Transform with AI">Yapay Zeka İle Dönüştürelim</div>
                     <div class="cert-org">Kodluyoruz</div>
                     <div class="cert-date" data-tr="Nisan 2025" data-en="April 2025">Nisan 2025</div>
+                    <a href="https://verified.sertifier.com/en/verify/14891205819686/" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
                 </div>
                 <div class="cert-card">
                     <div class="cert-icon">📊</div>
                     <div class="cert-title" data-tr="Data Science ve AI'a Giriş" data-en="Intro to Data Science and AI">Data Science ve AI'a Giriş</div>
                     <div class="cert-org">Miuul</div>
                     <div class="cert-date" data-tr="Şubat 2025" data-en="February 2025">Şubat 2025</div>
+                    <a href="https://learning.miuul.com/certificates/4f7kfe5l42" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
                 </div>
                 <div class="cert-card">
                     <div class="cert-icon">🧠</div>
                     <div class="cert-title" data-tr="Doğal Dil İşleme" data-en="Natural Language Processing">Doğal Dil İşleme</div>
                     <div class="cert-org">Turkcell Geleceği Yazanlar</div>
                     <div class="cert-date" data-tr="Şubat 2025" data-en="February 2025">Şubat 2025</div>
+                    <a href="https://gelecegiyazanlar.turkcell.com.tr/sertifika/4f5939ec81f64c5681a74b033fdbd8fd" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🤖</div>
+                    <div class="cert-title" data-tr="Uygulama Tabanlı Makine Öğrenimi" data-en="Application Based Machine Learning">Uygulama Tabanlı Makine Öğrenimi</div>
+                    <div class="cert-org">Turkcell Geleceği Yazanlar</div>
+                    <div class="cert-date" data-tr="Şubat 2025" data-en="February 2025">Şubat 2025</div>
+                    <a href="https://gelecegiyazanlar.turkcell.com.tr/sertifika/92cc6f6ef7874e3d92f69ca51797bb44" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
                 </div>
                 <div class="cert-card">
                     <div class="cert-icon">🔒</div>
-                    <div class="cert-title" data-tr="Siber Güvenliğe Giriş & Pentesting" data-en="Intro to Cybersecurity & Pentesting">Siber Güvenliğe Giriş & Pentesting</div>
+                    <div class="cert-title" data-tr="Siber Güvenliğe Giriş" data-en="Intro to Cybersecurity">Siber Güvenliğe Giriş</div>
                     <div class="cert-org">Turkcell Geleceği Yazanlar</div>
                     <div class="cert-date" data-tr="Şubat 2025" data-en="February 2025">Şubat 2025</div>
+                    <a href="https://gelecegiyazanlar.turkcell.com.tr/sertifika/953b4ca13bd64793a45c861de092f5f9" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🛡️</div>
+                    <div class="cert-title" data-tr="Pentesting" data-en="Pentesting">Pentesting</div>
+                    <div class="cert-org">Turkcell Geleceği Yazanlar</div>
+                    <div class="cert-date" data-tr="Şubat 2025" data-en="February 2025">Şubat 2025</div>
+                    <a href="https://gelecegiyazanlar.turkcell.com.tr/sertifika/fc4a6cfc03564618be3a9ef763e398b6" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
                 </div>
                 <div class="cert-card">
                     <div class="cert-icon">🌐</div>
                     <div class="cert-title" data-tr="HTML5 ile Web Geliştirme" data-en="Web Development with HTML5">HTML5 ile Web Geliştirme</div>
                     <div class="cert-org">BTK Akademi</div>
                     <div class="cert-date" data-tr="Şubat 2025" data-en="February 2025">Şubat 2025</div>
+                    <a href="https://www.btkakademi.gov.tr/portal/certificate/validate?certificateId=vpWc8yPvMl" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
                 </div>
                 <div class="cert-card">
                     <div class="cert-icon">🇬🇧</div>
                     <div class="cert-title" data-tr="B2 Seviye İngilizce" data-en="B2 Level English">B2 Seviye İngilizce</div>
                     <div class="cert-org">BTK Akademi</div>
                     <div class="cert-date" data-tr="Şubat 2025" data-en="February 2025">Şubat 2025</div>
+                    <a href="https://www.btkakademi.gov.tr/portal/certificate/validate?certificateId=mKEhvZ881B" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">💰</div>
+                    <div class="cert-title" data-tr="Finansal Okuryazarlık" data-en="Financial Literacy">Finansal Okuryazarlık</div>
+                    <div class="cert-org">Microfon</div>
+                    <div class="cert-date" data-tr="Mart 2025" data-en="March 2025">Mart 2025</div>
+                    <a href="https://academy.microfon.co/certificate/1572024" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
                 </div>
                 <div class="cert-card">
                     <div class="cert-icon">💼</div>
-                    <div class="cert-title" data-tr="MBA'e Giriş & Finansal Okuryazarlık" data-en="Intro to MBA & Financial Literacy">MBA'e Giriş & Finansal Okuryazarlık</div>
+                    <div class="cert-title" data-tr="MBA'e Giriş" data-en="Introduction to MBA">MBA'e Giriş</div>
                     <div class="cert-org">Microfon</div>
-                    <div class="cert-date" data-tr="Mart-Nisan 2025" data-en="March-April 2025">Mart-Nisan 2025</div>
+                    <div class="cert-date" data-tr="Nisan 2025" data-en="April 2025">Nisan 2025</div>
+                    <a href="https://academy.microfon.co/certificate/1593489" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
                 </div>
                 <div class="cert-card">
                     <div class="cert-icon">⚡</div>
-                    <div class="cert-title" data-tr="Teknolojide Fırsat Eşitliği" data-en="Equal Opportunity in Technology">Teknolojide Fırsat Eşitliği</div>
+                    <div class="cert-title" data-tr="Teknolojide Fırsat Eşitliği - Katılım" data-en="Equal Opportunity in Technology - Participation">Teknolojide Fırsat Eşitliği - Katılım</div>
                     <div class="cert-org">BAUGO</div>
-                    <div class="cert-date" data-tr="Şubat-Mart 2025" data-en="February-March 2025">Şubat-Mart 2025</div>
+                    <div class="cert-date" data-tr="Şubat 2025" data-en="February 2025">Şubat 2025</div>
+                    <a href="https://baugo.online/certificate/verify/c0f305585b5cccd8cbdd77e9854668f0" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🏆</div>
+                    <div class="cert-title" data-tr="Teknolojide Fırsat Eşitliği - Başarı" data-en="Equal Opportunity in Technology - Achievement">Teknolojide Fırsat Eşitliği - Başarı</div>
+                    <div class="cert-org">BAUGO</div>
+                    <div class="cert-date" data-tr="Mart 2025" data-en="March 2025">Mart 2025</div>
+                    <a href="https://baugo.online/certificate/verify/72affc97851b927e4dac09133df0c6f7" target="_blank" class="cert-link" data-tr="Sertifikayı Görüntüle" data-en="View Certificate">Sertifikayı Görüntüle</a>
                 </div>
             </div>
             <div style="text-align: center; margin-top: 50px;">
@@ -1017,25 +1242,6 @@
             trailIndex = (trailIndex + 1) % maxTrails;
         });
 
-        let konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-        let konamiIndex = 0;
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === konamiCode[konamiIndex]) {
-                konamiIndex++;
-                if (konamiIndex === konamiCode.length) {
-                    document.body.style.animation = 'rotate 2s linear';
-                    setTimeout(() => {
-                        alert(currentLang === 'tr' ? '🎉 Gizli kodu buldun! Gerçek bir geek\'sin! 🚀' : '🎉 You found the secret code! You\'re a true geek! 🚀');
-                        document.body.style.animation = '';
-                    }, 2000);
-                    konamiIndex = 0;
-                }
-            } else {
-                konamiIndex = 0;
-            }
-        });
-
         document.querySelectorAll('.stat-card').forEach(card => {
             card.addEventListener('click', () => {
                 const emojis = ['⭐', '🎯', '🔥', '💡', '🚀', '⚡', '💻'];
@@ -1060,6 +1266,26 @@
                     emojiEl.remove();
                 }, 1000);
             });
+        });
+
+        let konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    document.body.style.transform = 'rotate(360deg)';
+                    document.body.style.transition = 'transform 2s';
+                    setTimeout(() => {
+                        alert(currentLang === 'tr' ? '🎉 Gizli kodu buldun! Gerçek bir geek\'sin! 🚀' : '🎉 You found the secret code! You\'re a true geek! 🚀');
+                        document.body.style.transform = '';
+                    }, 2000);
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
         });
     </script>
 </body>
