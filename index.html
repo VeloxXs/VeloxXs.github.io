@@ -44,16 +44,25 @@
         }
 
         .logo {
-            font-size: 24px;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
             font-weight: bold;
-            color: #00d4ff;
-            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            color: #0a0a0a;
             cursor: pointer;
             transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            text-decoration: none;
         }
 
         .logo:hover {
-            transform: scale(1.1) rotate(5deg);
+            transform: scale(1.15) rotate(-5deg);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.8);
         }
 
         .nav-links {
@@ -412,6 +421,21 @@
 
         .project-content {
             padding: 30px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .project-github-btn {
+            margin-top: auto;
+            text-align: center;
         }
 
         .project-title {
@@ -423,6 +447,7 @@
         .project-desc {
             color: #c0c0c0;
             margin-bottom: 20px;
+            flex-grow: 1;
         }
 
         .project-tech {
@@ -703,7 +728,9 @@
 
     <header>
         <nav class="container">
-            <a href="https://www.linkedin.com/in/sinan-saritas01" target="_blank" class="logo" style="text-decoration: none;">SS</a>
+            <a href="https://www.linkedin.com/in/sinan-saritas01" target="_blank" class="logo">
+                SS
+            </a>
             <div class="nav-links">
                 <a href="#about" class="nav-link" data-tr="Hakkımda" data-en="About">Hakkımda</a>
                 <a href="#experience" class="nav-link" data-tr="Deneyim" data-en="Experience">Deneyim</a>
@@ -899,6 +926,9 @@
                             <span class="tech-tag">SQL</span>
                             <span class="tech-tag">JDBC</span>
                         </div>
+                        <div class="project-github-btn">
+                            <a href="https://github.com/VeloxXs/Library-Management" target="_blank" class="cert-link" data-tr="GitHub'da Görüntüle" data-en="View on GitHub">GitHub'da Görüntüle</a>
+                        </div>
                     </div>
                 </div>
                 <div class="project-card">
@@ -909,6 +939,9 @@
                             <span class="tech-tag">Java</span>
                             <span class="tech-tag">OOP</span>
                         </div>
+                        <div class="project-github-btn">
+                            <a href="https://github.com/VeloxXs/fitnessApplication" target="_blank" class="cert-link" data-tr="GitHub'da Görüntüle" data-en="View on GitHub">GitHub'da Görüntüle</a>
+                        </div>
                     </div>
                 </div>
                 <div class="project-card">
@@ -918,6 +951,9 @@
                         <div class="project-tech">
                             <span class="tech-tag">Java</span>
                             <span class="tech-tag">Database</span>
+                        </div>
+                        <div class="project-github-btn">
+                            <a href="https://github.com/VeloxXs/Rent-A-Car-Project" target="_blank" class="cert-link" data-tr="GitHub'da Görüntüle" data-en="View on GitHub">GitHub'da Görüntüle</a>
                         </div>
                     </div>
                 </div>
